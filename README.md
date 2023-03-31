@@ -1,7 +1,7 @@
 ## Requirements
-Node.js 16.0.0 or higher is required.
-.Net Core 7.0
-yarn 1.22.10 or higher is required.
+ - Node.js 16.0.0 or higher is required.
+ - .Net Core 7.0 
+ - yarn 1.22.10 or higher is required.
 ## Installation
 
 ### Client Dependencies
