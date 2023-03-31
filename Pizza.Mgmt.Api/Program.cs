@@ -1,7 +1,10 @@
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using Pizza.Mgmt.Api.Data;
+using Pizza.Mgmt.Api.Services.Customers;
 using Pizza.Mgmt.Api.Services.Employees;
+using Pizza.Mgmt.Api.Services.Orders;
 
 var LocalhostCorsPolicy = "_LocalhostCorsPolicy";
 
@@ -9,7 +12,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddProblemDetails();
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(opts =>
+{
+    var enumConverter = new JsonStringEnumConverter();
+    opts.JsonSerializerOptions.Converters.Add(enumConverter);
+});
 builder.Services.AddApiVersioning(options =>
 {
     // reporting api versions will return the headers
@@ -24,6 +31,8 @@ builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IEmployeeAppService, EmployeeAppService>();
+builder.Services.AddScoped<IOrderAppService, OrderAppService>();
+builder.Services.AddScoped<ICustomerAppService, CustomerAppService>();
 
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
@@ -34,7 +43,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: LocalhostCorsPolicy,
-        policy  =>
+        policy =>
         {
             policy.WithOrigins("http://localhost:4200")
                 .AllowAnyHeader()

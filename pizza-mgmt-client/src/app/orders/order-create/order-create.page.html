@@ -1,7 +1,13 @@
 <app-page>
+  <app-toast
+    [open]="(toastOpen$ | async) || false"
+    [isError]="(isErrored$ | async) || false"
+    [message]="
+      (isErrored$ | async) || false ? 'Ups! Something went wrong' : 'Order Created!'
+    "></app-toast>
   <div class="mx-auto max-w-2xl py-8 px-4 lg:py-16">
     <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">New Order</h2>
-    <form [formGroup]="createOrderForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="createOrderForm">
       <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
         <div class="sm:col-span-2">
           <label for="address" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
@@ -25,7 +31,6 @@
             formControlName="pizzaSize"
             id="pizza_size"
             class="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400">
-            <option selected>Select...</option>
             <option *ngFor="let ps of pizzaSizes" [value]="ps">{{ ps }}</option>
           </select>
         </div>
@@ -39,7 +44,6 @@
             formControlName="pizzaType"
             id="pizza_type"
             class="focus:ring-primary-500 focus:border-primary-500 dark:focus:ring-primary-500 dark:focus:border-primary-500 block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400">
-            <option selected>Select...</option>
             <option *ngFor="let pt of pizzaTypes" [value]="pt">{{ pt }}</option>
           </select>
         </div>
@@ -102,7 +106,12 @@
         </ng-container>
       </div>
       <div class="mt-8 flex flex-row-reverse">
-        <app-button type="submit" [disabled]="createOrderForm.invalid"> Create Order </app-button>
+        <app-button
+          type="button"
+          [disabled]="createOrderForm.invalid"
+          (buttonClick)="submitHandler$.next($event)">
+          Create Order
+        </app-button>
         <app-button [secondary]="true" class="mr-8" link="/orders"> Cancel </app-button>
       </div>
     </form>

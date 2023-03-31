@@ -7,9 +7,17 @@ import { OrderListPage } from './order-list/order-list.page';
 import { OrderCreatePage } from './order-create/order-create.page';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from '../shared/button/button.component';
+import { ToastComponent } from '../shared/toast/toast.component';
 
 @NgModule({
   declarations: [OrderListPage, OrderCreatePage],
-  imports: [CommonModule, OrdersRoutingModule, PageComponent, ReactiveFormsModule, ButtonComponent],
+  imports: [
+    CommonModule,
+    OrdersRoutingModule,
+    PageComponent,
+    ReactiveFormsModule,
+    ButtonComponent,
+    ToastComponent,
+  ],
 })
 export class OrdersModule {}

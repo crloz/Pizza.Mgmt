@@ -19,7 +19,7 @@ public class OrderController: ControllerBase
     }
     
     [HttpPost]
-    public async Task<Order> CreateOrderAsync(CreateOrderInput input)
+    public async Task<OrderDto> CreateOrderAsync(CreateOrderInput input)
     {
         // catch ServiceException and return 400
         try

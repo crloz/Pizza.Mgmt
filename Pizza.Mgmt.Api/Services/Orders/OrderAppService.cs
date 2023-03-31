@@ -15,7 +15,7 @@ public class OrderAppService: AppServiceBase, IOrderAppService
         _customerAppService = customerAppService;
     }
     
-    public async Task<Order> CreateOrderAsync(CreateOrderInput input)
+    public async Task<OrderDto> CreateOrderAsync(CreateOrderInput input)
     {
         var customer = await _customerAppService.CreateCustomerAsync(input.Customer);
         var order = new Order
@@ -29,6 +29,7 @@ public class OrderAppService: AppServiceBase, IOrderAppService
             Customer = customer
         };
         await _repository.InsertAsync(order);
-        return order;
+        await _repository.CompleteAsync();
+        return this._mapper.Map<OrderDto>(order);
     }
 }

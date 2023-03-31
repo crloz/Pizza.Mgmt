@@ -35,3 +35,13 @@ export interface CreateOrderInput {
   deliveryAddress: string;
   customer: CreateCustomerInput;
 }
+export interface Order {
+  id: string;
+  createdAt: string;
+  totalPrice: number;
+  pizzaSize: PizzaSize;
+  pizzaType: PizzaType;
+  deliveryAddress: string;
+  status: OrderStatus;
+  tipAmount: number;
+}
