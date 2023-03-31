@@ -1,0 +1,16 @@
+@tailwind components;
+
+@layer components {
+  .breadcrumb {
+    @apply inline-flex items-center space-x-1 md:space-x-3;
+  }
+  .breadcrumb-item {
+    @apply flex items-center;
+  }
+  .breadcrumb-link {
+    @apply ml-1 text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white md:ml-2;
+  }
+  .breadcrumb-item--current {
+    @apply ml-1 text-sm font-medium text-gray-500 dark:text-gray-400 md:ml-2;
+  }
+}

@@ -1,0 +1,80 @@
+<app-page>
+  <form novalidate [formGroup]="employeeForm">
+    <div class="mb-6 grid gap-6 px-10 sm:px-5 md:grid-cols-1 md:px-20 lg:px-60 xl:px-80">
+      <div>
+        <label
+          for="first_name"
+          class="pz-label"
+          [class.pz-label-error]="
+            employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched
+          "
+          >First name</label
+        >
+        <input
+          formControlName="firstName"
+          type="text"
+          id="first_name"
+          class="pz-input"
+          [class.pz-input-error]="
+            employeeForm.get('firstName')?.invalid && employeeForm.get('firstName')?.touched
+          "
+          placeholder="John" />
+      </div>
+      <div>
+        <label
+          for="last_name"
+          class="pz-label"
+          [class.pz-label-error]="
+            employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched
+          ">
+          Last name</label
+        >
+        <input
+          formControlName="lastName"
+          type="text"
+          id="last_name"
+          class="pz-input"
+          [class.pz-input-error]="
+            employeeForm.get('lastName')?.invalid && employeeForm.get('lastName')?.touched
+          "
+          placeholder="Doe" />
+      </div>
+      <div>
+        <label
+          for="hourlyRate"
+          class="label"
+          [class.label-error]="
+            employeeForm.get('hourlyRate')?.invalid && employeeForm.get('hourlyRate')?.touched
+          ">
+          Hourly Rate</label
+        >
+        <input
+          formControlName="hourlyRate"
+          type="number"
+          id="hourlyRate"
+          class="pz-input"
+          [class.pz-input-error]="
+            employeeForm.get('hourlyRate')?.invalid && employeeForm.get('hourlyRate')?.touched
+          "
+          placeholder="" />
+      </div>
+      <div>
+        <label class="relative inline-flex cursor-pointer items-center">
+          <input type="checkbox" value="" class="peer sr-only" formControlName="isActive" />
+          <div
+            class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:border-gray-600 dark:bg-gray-700 dark:peer-focus:ring-blue-800"></div>
+          <span class="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Active</span>
+        </label>
+      </div>
+      <div class="flex w-full flex-row-reverse">
+        <app-button
+          class="ml-6"
+          (click)="submitButtonClickHandler$.next($event)"
+          [disabled]="buttonDisabled$ | async">
+          Create
+        </app-button>
+        <app-button [secondary]="true" link=".."> Cancel </app-button>
+      </div>
+    </div>
+  </form>
+</app-page>

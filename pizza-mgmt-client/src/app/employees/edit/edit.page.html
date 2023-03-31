@@ -1,0 +1,16 @@
+<app-page>
+  <app-toast
+    [open]="(isOpen$ | async) || false"
+    [isError]="(updateOperationResult$ | async) || false"
+    [autoHide]="true"
+    [message]="
+      (updateOperationResult$ | async) || false
+        ? 'Ups! Something went wrong'
+        : 'Updated successfully!'
+    "></app-toast>
+  <app-employee-form
+    saveButtonText="Save"
+    [employee]="employee$ | async"
+    [saveButtonDisabled]="(isLoading$ | async) || false"
+    (saveClick)="onSaveClickHandler$.next($event)"></app-employee-form>
+</app-page>

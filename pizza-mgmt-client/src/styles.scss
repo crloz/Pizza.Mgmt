@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import 'assets/inter-font-web/inter.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* global components */
+
+@layer components {
+  .pz-label {
+    @apply mb-2 block text-sm font-medium text-gray-900;
+  }
+  .pz-label-error {
+    @apply text-red-700;
+  }
+  .pz-input {
+    @apply block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500;
+  }
+  .pz-input-error {
+    @apply border-red-500 bg-red-50 p-2.5 text-sm text-red-900 placeholder-red-700 focus:border-red-500 focus:ring-red-500;
+  }
+  .pz-input-error__description {
+    @apply mt-2 text-sm text-red-600;
+  }
+}

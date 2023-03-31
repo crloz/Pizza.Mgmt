@@ -1,0 +1,31 @@
+<ng-template #content>
+  <ng-content select="[start]"></ng-content>
+  <ng-content></ng-content>
+  <ng-content select="[end]"></ng-content>
+</ng-template>
+<ng-template #anchor>
+  <a
+    [routerLink]="link"
+    (click)="buttonClick.emit($event)"
+    class="btn"
+    [class.btn-primary]="!secondary"
+    [class.btn-secondary]="secondary"
+    [class.btn-primary--disabled]="!secondary && disabled"
+    [class.btn-secondary--disabled]="secondary && disabled">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </a>
+</ng-template>
+<ng-template #button>
+  <button
+    (click)="buttonClick.emit($event)"
+    [type]="type"
+    class="btn"
+    [class.btn-primary]="!secondary"
+    [class.btn-secondary]="secondary"
+    [class.btn-primary--disabled]="!secondary && disabled"
+    [class.btn-secondary--disabled]="secondary && disabled"
+    [disabled]="disabled">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </button>
+</ng-template>
+<ng-container *ngTemplateOutlet="!!link ? anchor : button"></ng-container>
